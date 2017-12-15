@@ -8,13 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  login() {
-    this.userService.login();
   }
 
 }

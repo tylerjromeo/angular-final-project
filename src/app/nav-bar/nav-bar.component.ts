@@ -1,4 +1,4 @@
-import { UserService } from './../user.service';
+import { UserService, User } from './../user.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -9,11 +9,15 @@ import { Observable } from 'rxjs/Observable';
 })
 export class NavBarComponent implements OnInit {
 
-  username: Observable<String>;
+  user$: Observable<User>;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.username = this.userService.getUsername();
+    this.user$ = this.userService.getUser();
+  }
+
+  logout() {
+    this.userService.logout();
   }
 
 }
