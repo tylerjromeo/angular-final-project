@@ -25,3 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+----My stuff after here----
+to deploy to firebase: `npm run deploy`. Make sure you have firebase CLI installed and have logged in with my credentials first :)
+
+hosted at https://angular-final-project-353e2.firebaseapp.com
