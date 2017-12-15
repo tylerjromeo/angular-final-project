@@ -1,6 +1,7 @@
-import { UserService, User } from './../user.service';
+import { UserService } from './../user.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,11 +10,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class NavBarComponent implements OnInit {
 
-  user$: Observable<User>;
+  user: User;
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.user$ = this.userService.getUser();
+    this.userService.getCurrentUser().subscribe(user => this.user = user);
   }
 
   logout() {

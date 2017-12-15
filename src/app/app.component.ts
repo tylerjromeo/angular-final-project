@@ -9,8 +9,14 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
   constructor(private userService: UserService, router: Router) {
-    userService.getUser().subscribe(user => {
+    userService.getUserState().subscribe(user => {
       if (user) {
+        userService.saveUser({
+          id: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+        });
+
         const returnUrl = localStorage.getItem('returnUrl');
         router.navigateByUrl(returnUrl);
       }

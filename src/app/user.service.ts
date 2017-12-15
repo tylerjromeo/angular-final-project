@@ -1,18 +1,20 @@
+import { User } from './models/user';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute } from '@angular/router';
-
-export interface User {
-  displayName: String;
-}
 
 @Injectable()
 export class UserService {
 
-  constructor(private afAuth: AngularFireAuth, private route: ActivatedRoute) { }
+  constructor(private afAuth: AngularFireAuth,
+    private afDb: AngularFireDatabase,
+    private route: ActivatedRoute) { }
 
   login() {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
@@ -24,13 +26,28 @@ export class UserService {
     this.afAuth.auth.signOut();
   }
 
-  getUser(): Observable<User> {
-    return this.afAuth.authState.map(firebaseUser => {
-      if (firebaseUser) {
-        return {
-          displayName: firebaseUser.displayName
-        };
+  getUserState(): Observable<firebase.User> {
+    return this.afAuth.authState;
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.getUserState().switchMap(user => {
+      if (user) {
+        return this.getUser(user.uid);
+      } else {
+        return Observable.of(null);
       }
+    });
+  }
+
+  getUser(id: String): FirebaseObjectObservable<User> {
+    return this.afDb.object('/users/' + id);
+  }
+
+  saveUser(user: User) {
+    this.afDb.object('/users/' + user.id).update({
+      displayName: user.displayName,
+      email: user.email
     });
   }
 
