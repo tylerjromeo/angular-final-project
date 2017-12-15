@@ -1,0 +1,8 @@
+.nav-bar {
+  background: lightgray;
+  padding: 10px;
+}
+
+.home-link {
+  cursor: pointer;
+}
