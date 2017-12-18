@@ -1,3 +1,4 @@
+import { ProductService } from './product.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -46,6 +47,7 @@ import { AuthGuard } from './auth-guard.service';
   ],
   providers: [
     UserService,
+    ProductService,
     AuthGuard,
     AdminAuthGuard
   ],
