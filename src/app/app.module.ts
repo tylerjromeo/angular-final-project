@@ -1,6 +1,8 @@
 import { ProductService } from './product.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { CustomFormsModule } from 'ng2-validation';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -45,6 +47,8 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AppRoutingModule,
+    FormsModule,
+    CustomFormsModule,
     NgbModule.forRoot()
   ],
   providers: [

@@ -18,6 +18,7 @@ export class AppComponent {
         });
 
         const returnUrl = localStorage.getItem('returnUrl');
+        localStorage.removeItem('returnUrl');
         router.navigateByUrl(returnUrl);
       }
     });
