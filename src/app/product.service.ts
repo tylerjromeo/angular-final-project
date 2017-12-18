@@ -17,6 +17,14 @@ export class ProductService {
     });
   }
 
+  getProduct(id): Observable<Product> {
+    return this.afDb.object('/products/' + id);
+  }
+
+  updateProduct(id, product) {
+    return this.afDb.object('/products/' + id).update(product);
+  }
+
   addProduct(product: Product) {
     return this.afDb.list('/products').push(product);
   }
