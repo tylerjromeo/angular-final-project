@@ -29,6 +29,10 @@ export class ProductService {
     return this.afDb.list('/products').push(product);
   }
 
+  deleteProduct(id) {
+    return this.afDb.object('/products/' + id).remove();
+  }
+
   getAllCategories(): Observable<Category[]> {
     return this.afDb.list('/categories');
   }
