@@ -1,15 +1,30 @@
 <div class="row">
-  <ng-container *ngFor="let product of products$ | async; let odd = odd">
-    <div class="col">
-      <div class="card" style="width: 15rem;">
-        <img *ngIf="product.imageUrl" class="card-img-top" [src]="product.imageUrl">
-        <div class="card-body">
-          <h4 class="card-title">{{ product.title }}</h4>
-          <p class="card-text">{{ product.price | currency:'USD':true }}</p>
-          <a class="btn btn-primary">Add to cart</a>
-        </div>
-      </div>
+  <div class="col-3">
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action" [class.active]="!selectedCategory" routerLink="/">
+        All Categories
+      </a>
+      <a *ngFor="let category of categories$ | async" class="list-group-item list-group-item-action" [class.active]="selectedCategory === category.$key"
+        routerLink="/" [queryParams]="{category: category.$key}">
+        {{ category.name }}
+      </a>
     </div>
-    <div *ngIf="odd" class="w-100"></div>
-  </ng-container>
+  </div>
+  <div class="col">
+    <div class="row">
+      <ng-container *ngFor="let product of filteredProducts; let odd = odd">
+        <div class="col">
+          <div class="card" style="width: 15rem;">
+            <img *ngIf="product.imageUrl" class="card-img-top" [src]="product.imageUrl">
+            <div class="card-body">
+              <h4 class="card-title">{{ product.title }}</h4>
+              <p class="card-text">{{ product.price | currency:'USD':true }}</p>
+              <a class="btn btn-primary">Add to cart</a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="odd" class="w-100"></div>
+      </ng-container>
+    </div>
+  </div>
 </div>
