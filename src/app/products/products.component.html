@@ -1,7 +1,15 @@
-<div>
-  <ul>
-    <li *ngFor="let product of products$ | async as products">
-      {{ product.title }}
-    </li>
-  </ul>
+<div class="row">
+  <ng-container *ngFor="let product of products$ | async; let odd = odd">
+    <div class="col">
+      <div class="card" style="width: 15rem;">
+        <img *ngIf="product.imageUrl" class="card-img-top" [src]="product.imageUrl">
+        <div class="card-body">
+          <h4 class="card-title">{{ product.title }}</h4>
+          <p class="card-text">{{ product.price | currency:'USD':true }}</p>
+          <a class="btn btn-primary">Add to cart</a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="odd" class="w-100"></div>
+  </ng-container>
 </div>

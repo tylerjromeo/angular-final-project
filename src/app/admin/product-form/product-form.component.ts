@@ -16,7 +16,7 @@ export class ProductFormComponent implements OnInit {
 
   categories$: Observable<Category[]>;
   id;
-  product = {};
+  product: Product;
 
   constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
 
