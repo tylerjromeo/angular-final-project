@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './../shopping-cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from './../models/category';
 import { Observable } from 'rxjs/Observable';
@@ -19,6 +20,7 @@ export class ProductsComponent implements OnInit {
   selectedCategory: string;
 
   constructor(private productService: ProductService,
+    private cartService: ShoppingCartService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -34,6 +36,10 @@ export class ProductsComponent implements OnInit {
         this.products.filter(p => p.category === this.selectedCategory) :
         this.products;
     });
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 
 }

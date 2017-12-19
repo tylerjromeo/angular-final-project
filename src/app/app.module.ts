@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
   providers: [
     UserService,
     ProductService,
+    ShoppingCartService,
     AuthGuard,
     AdminAuthGuard
   ],
