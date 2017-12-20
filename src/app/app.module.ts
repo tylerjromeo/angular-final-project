@@ -28,6 +28,7 @@ import { AuthGuard } from './auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,
