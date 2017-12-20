@@ -1,7 +1,7 @@
 export interface Product {
-  $key: String;
-  category: String;
-  imageUrl: String;
-  price: Number;
-  title: String;
+  $key: string;
+  category: string;
+  imageUrl: string;
+  price: number;
+  title: string;
 }

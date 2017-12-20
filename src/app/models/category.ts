@@ -1,4 +1,4 @@
 export interface Category {
-  name: String;
-  $key: String;
+  name: string;
+  $key: string;
 }

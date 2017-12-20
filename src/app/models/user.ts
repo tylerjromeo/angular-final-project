@@ -1,6 +1,6 @@
 export interface User {
-  id: String;
-  displayName: String;
-  email: String;
+  id: string;
+  displayName: string;
+  email: string;
   isAdmin?: boolean;
 }

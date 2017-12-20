@@ -9,7 +9,7 @@ export class ShoppingCartService {
 
   constructor(private afDb: AngularFireDatabase) { }
 
-  private async getCartId() {
+  private async getCartId(): Promise<string> {
     let cartId = localStorage.getItem('cartId');
     if (!cartId) {
       const result = await this.createCart();
@@ -29,17 +29,28 @@ export class ShoppingCartService {
     });
   }
 
-  getCart(cartId: string) {
+  async getCart() {
+    const cartId = await this.getCartId();
     return this.afDb.object('/shopping-carts/' + cartId);
   }
-
-
 
   async addToCart(product: Product) {
     const cartId = await this.getCartId();
     const item$ = this.getItem(cartId, product.$key);
     item$.take(1).subscribe(item => {
       item$.update({ product: product, quantity: (item.quantity || 0) + 1 });
+    });
+  }
+
+  async removeFromCart(product: Product) {
+    const cartId = await this.getCartId();
+    const item$ = this.getItem(cartId, product.$key);
+    item$.take(1).subscribe(item => {
+      if (item && item.quantity > 1) {
+        item$.update({ product: product, quantity: item.quantity - 1 });
+      } else if (item && item.quantity === 1) {
+        item$.remove();
+      }
     });
   }
 }

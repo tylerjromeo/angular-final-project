@@ -16,16 +16,7 @@
     <div class="row">
       <ng-container *ngFor="let product of filteredProducts; let odd = odd">
         <div class="col">
-          <div class="card" style="width: 15rem;">
-            <img *ngIf="product.imageUrl" class="card-img-top" [src]="product.imageUrl">
-            <div class="card-body">
-              <h4 class="card-title">{{ product.title }}</h4>
-              <p class="card-text">{{ product.price | currency:'USD':true }}</p>
-            </div>
-            <div class="card-footer">
-              <button (click)="addToCart(product)" class="btn btn-primary btn-block">Add to Cart</button>
-            </div>
-          </div>
+          <app-product-card [product]="product" [shopping-cart]="cart"></app-product-card>
         </div>
         <div *ngIf="odd" class="w-100"></div>
       </ng-container>
