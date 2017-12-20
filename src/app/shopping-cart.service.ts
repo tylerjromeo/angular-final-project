@@ -11,20 +11,6 @@ export class ShoppingCartService {
 
   constructor(private afDb: AngularFireDatabase) { }
 
-  private async getCartId(): Promise<string> {
-    let cartId = localStorage.getItem('cartId');
-    if (!cartId) {
-      const result = await this.createCart();
-      cartId = result.key;
-      localStorage.setItem('cartId', cartId);
-    }
-    return cartId;
-  }
-
-  private getItem(cartId: String, productId: String) {
-    return this.afDb.object('shopping-carts/' + cartId + '/items/' + productId);
-  }
-
   createCart() {
     return this.afDb.list('/shopping-carts').push({
       dateCreated: new Date().getTime()
@@ -45,6 +31,11 @@ export class ShoppingCartService {
     this.updateItem(product, -1);
   }
 
+  async clearCart() {
+    const cartId = await this.getCartId();
+    return this.afDb.object('/shopping-carts/' + cartId + '/items').remove();
+  }
+
   private async updateItem(product: Product, change: number) {
     const cartId = await this.getCartId();
     const item$ = this.getItem(cartId, product.$key);
@@ -61,5 +52,19 @@ export class ShoppingCartService {
         item$.remove();
       }
     });
+  }
+
+  private async getCartId(): Promise<string> {
+    let cartId = localStorage.getItem('cartId');
+    if (!cartId) {
+      const result = await this.createCart();
+      cartId = result.key;
+      localStorage.setItem('cartId', cartId);
+    }
+    return cartId;
+  }
+
+  private getItem(cartId: String, productId: String) {
+    return this.afDb.object('shopping-carts/' + cartId + '/items/' + productId);
   }
 }
