@@ -1,3 +1,4 @@
+import { OrderService } from './order.service';
 import { ProductService } from './product.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,6 +30,8 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { ShoppingCartService } from './shopping-cart.service';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     LoginComponent,
     ProductFormComponent,
     ProductCardComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +67,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     UserService,
     ProductService,
     ShoppingCartService,
+    OrderService,
     AuthGuard,
     AdminAuthGuard
   ],
