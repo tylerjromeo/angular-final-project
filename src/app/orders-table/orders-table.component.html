@@ -1,0 +1,18 @@
+<h1>Orders</h1>
+<table *ngIf="orders" class="table">
+  <thead>
+    <th>Customer</th>
+    <th>Date</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.shipping.name }}</td>
+      <!-- <td>{{ new Date(order.datePlaced) | mediumDate }}</td> -->
+      <td>{{ order.datePlaced | date:'mediumDate' }}</td>
+      <td>
+        <a href="#">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
